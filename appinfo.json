@@ -1,0 +1,136 @@
+{
+    "appKeys": {
+        "alert": 3,
+        "bg": 1,
+        "bgeight": 13,
+        "bgeleven": 16,
+        "bgfive": 10,
+        "bgfour": 9,
+        "bgnine": 14,
+        "bgone": 6,
+        "bgseven": 12,
+        "bgsix": 11,
+        "bgten": 15,
+        "bgthree": 8,
+        "bgtwelve": 17,
+        "bgtwo": 7,
+        "delta": 5,
+        "icon": 0,
+        "readtime": 2,
+        "time": 4
+    },
+    "capabilities": [
+        ""
+    ],
+    "companyName": "CostikCare,LLC",
+    "longName": "Evan's CGM",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/cloud-x.png",
+                "name": "IMAGE_CLOUDX",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Disconnected.png",
+                "name": "IMAGE_DISCONNECTED",
+                "type": "png"
+            },
+            {
+                "file": "images/724.png",
+                "name": "IMAGE_LOADER",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/private.png",
+                "name": "IMAGE_PRIVATE",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/circle.png",
+                "name": "IMAGE_CIRCLE",
+                "type": "png-trans"
+            },
+            {
+                "file": "fonts/Calibri.ttf",
+                "name": "CALIBRI_16",
+                "type": "font"
+            },
+            {
+                "file": "fonts/Calibri.ttf",
+                "name": "CALIBRI_20",
+                "type": "font"
+            },
+            {
+                "file": "fonts/Calibri.ttf",
+                "name": "CALIBRI_28",
+                "type": "font"
+            },
+            {
+                "file": "fonts/Calibri Bold.ttf",
+                "name": "CALIBRI_BOLD_16",
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:]",
+                "file": "fonts/Calibri Bold.ttf",
+                "name": "CALIBRI_BOLD_44",
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:]",
+                "file": "fonts/Calibri Bold.ttf",
+                "name": "CALIBRI_BOLD_25",
+                "type": "font"
+            },
+            {
+                "file": "images/none.png",
+                "name": "IMAGE_NONE",
+                "type": "png"
+            },
+            {
+                "file": "images/down45.png",
+                "name": "IMAGE_DOWN45",
+                "type": "png"
+            },
+            {
+                "file": "images/downdown.png",
+                "name": "IMAGE_DOWNDOWN",
+                "type": "png"
+            },
+            {
+                "file": "images/down.png",
+                "name": "IMAGE_DOWN",
+                "type": "png"
+            },
+            {
+                "file": "images/flat.png",
+                "name": "IMAGE_FLAT",
+                "type": "png"
+            },
+            {
+                "file": "images/up45.png",
+                "name": "IMAGE_UP45",
+                "type": "png"
+            },
+            {
+                "file": "images/upup.png",
+                "name": "IMAGE_UPUP",
+                "type": "png"
+            },
+            {
+                "file": "images/up.png",
+                "name": "IMAGE_UP",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "CGM",
+    "uuid": "59fa0091-be09-4668-abfa-6c65640ef23b",
+    "versionCode": 2,
+    "versionLabel": "2.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
