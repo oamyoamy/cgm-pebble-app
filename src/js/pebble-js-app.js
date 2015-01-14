@@ -4,7 +4,7 @@ function fetchCgmData(lastReadTime, lastBG) {
 
     var response;
     var req = new XMLHttpRequest();
-    req.open('GET', "https://SOME.ENDPOINT", true);
+    req.open('GET', "https://xxxxxxxx/pebble", true);
 
     req.onload = function(e) {
         console.log(req.readyState);
@@ -27,8 +27,8 @@ function fetchCgmData(lastReadTime, lastBG) {
                 var hours = readTime2.getHours();
               
                 //comment out for 24hr time
-                //if (hours > 12)
-                  //hours = hours-12;
+                if (hours > 12)
+                  hours = hours-12;
                 
                 if (minutes < 10)
                     readtime = hours + ":0" + readTime2.getMinutes();
@@ -42,15 +42,15 @@ function fetchCgmData(lastReadTime, lastBG) {
                 hours = nowTime2.getHours();
               
                 //comment out for 24hr time
-                //if (hours > 12)
-                  //hours = hours-12;
+                if (hours > 12)
+                  hours = hours-12;
                 
                 if (minutes < 10)
                     nowTime = hours + ":0" + nowTime2.getMinutes();
                 else
                     nowTime = hours + ":" + nowTime2.getMinutes();
                 
-                nowTime = (nowTime2.getMonth() + 1) + "/" + (nowTime2.getDate()) + "  " + response[0].battery + "%";
+				nowTime =  response[0].battery + "% ~ " + (nowTime2.getMonth() + 1) + "/" + (nowTime2.getDate());
                 //nowTime = nowTime2.toLocaleTimeString();
                 
                 //console.log(readtime);
@@ -67,17 +67,24 @@ function fetchCgmData(lastReadTime, lastBG) {
                 var lossValue = parseFloat(response[0].avgloss);
                 lossValue = (lossValue * 100).toFixed(3);
                 var delta = response[0].bgdelta + " mg/dL\n" + response[0].noise;
-                
+				
+				var sinceread = parseInt(response[0].timesinceread);
+				var sinceupload = parseInt(response[0].timesinceupload);
+				
+				//if (sinceread == "0")
+					//sinceread = "now";
+				
+				//if (sinceupload == "0")
+					//sinceupload = "now";
+				
+                //var lastdata = "rx: " + sinceread +  "  up: " + sinceupload ;
+				//var lastdata = "";
                 if((lastReadTime == readtime) && (lastBG == bg))
                 {
                     alertValue = 0;
                 } else
                 {
-                    if (parseInt(bg,10) < 80)
-                        alertValue = 2;
-                    else if (parseInt(bg,10) > 180)
-                        alertValue = 3;
-                    else
+        
                         alertValue = 1;
                     
                     
@@ -98,11 +105,11 @@ function fetchCgmData(lastReadTime, lastBG) {
                 
                 if (parseInt(response[0].alert,10) == 500) {
                   alertValue = 6;
-                  //nowTime = "Upload Err";
+                  //lastdata = "Out of range!";
                 }
                 if (parseInt(response[0].alert,10) == 501) {
                   alertValue = 7;
-                  //nowTime =  "CGM Upload Error";
+                  //lastdata =  "Not uploading!";
                 }
                 
                 var bgArray = [];
@@ -135,6 +142,8 @@ function fetchCgmData(lastReadTime, lastBG) {
                                       "bgten": bgArray[9],
                                       "bgeleven": bgArray[10],
                                       "bgtwelve": bgArray[11],
+					"lastread": response[0].timesinceread,
+					"lastupload": response[0].timesinceupload
                                       });
             } else {
                 console.log("first if");
@@ -151,7 +160,7 @@ function fetchCgmData(lastReadTime, lastBG) {
 Pebble.addEventListener("ready",
                         function(e) {
                         console.log("connect: " + e.ready);
-                        fetchCgmData(0, 0);
+                        //fetchCgmData(0, 0);
                         //console.log("connect!" + e.payload);
                         });
 
@@ -161,16 +170,6 @@ Pebble.addEventListener("appmessage",
                         fetchCgmData(e.payload.readtime, e.payload.bg);
                         });
 
-Pebble.addEventListener("showConfiguration", function() {
-                        console.log("showing configuration");
-                        Pebble.openURL('http://evan.costikcare.com/pebbleconfig.html');
-                        });
 
-Pebble.addEventListener("webviewclosed", function(e) {
-                        console.log("configuration closed");
-                        // webview closed
-                        var options = JSON.parse(decodeURIComponent(e.response));
-                        console.log("Options = " + JSON.stringify(options));
-                        });
 
 
