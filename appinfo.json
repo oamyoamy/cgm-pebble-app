@@ -129,11 +129,6 @@
                 "type": "png"
             },
             {
-                "file": "images/cloud-x.png",
-                "name": "IMAGE_CLOUDX",
-                "type": "png-trans"
-            },
-            {
                 "file": "images/ack.png",
                 "name": "IMAGE_ACK",
                 "type": "png-trans"
