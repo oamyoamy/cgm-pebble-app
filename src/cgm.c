@@ -542,8 +542,8 @@ static void init(void) {
         TupletInteger(CGM_BG_TEN, (uint8_t) 200),
         TupletInteger(CGM_BG_ELEVEN, (uint8_t) 200),
         TupletInteger(CGM_BG_TWELVE, (uint8_t) 200),
-        TupletInteger(CGM_BG_LASTREAD, (uint8_t) 0),
-        TupletInteger(CGM_BG_LASTUPLOAD, (uint8_t) 0)
+//         TupletInteger(CGM_BG_LASTREAD, (uint8_t) 0),
+//         TupletInteger(CGM_BG_LASTUPLOAD, (uint8_t) 0)
     };
     app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
     app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),sync_tuple_changed_callback, sync_error_callback, NULL);
