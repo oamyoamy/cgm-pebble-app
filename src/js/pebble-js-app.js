@@ -16,7 +16,7 @@ function fetchCgmData(lastReadTime, lastBG) {
                 
                 console.log("bg: " + response[0].sgv);
                 console.log("rt: " + response[0].datetime);
-                console.log("trend: " + response[0].trend);
+                console.log("trend: " + response[0].direction);
 
 
                 var bg;
@@ -50,7 +50,7 @@ function fetchCgmData(lastReadTime, lastBG) {
                 else
                     nowTime = hours + ":" + nowTime2.getMinutes();
                 
-				nowTime =  response[0].battery + "% ~ " + (nowTime2.getMonth() + 1) + "/" + (nowTime2.getDate());
+                nowTime =  response[0].battery + "% ~ " + (nowTime2.getMonth() + 1) + "/" + (nowTime2.getDate());
                 //nowTime = nowTime2.toLocaleTimeString();
                 
                 //console.log(readtime);
@@ -64,53 +64,58 @@ function fetchCgmData(lastReadTime, lastBG) {
                 console.log("time: " + readtime);
                 console.log("bg: " + bg);
                 
-                var lossValue = parseFloat(response[0].avgloss);
-                lossValue = (lossValue * 100).toFixed(3);
+                // not calced in NS endpoint; JWS 3/27/15
+                // var lossValue = parseFloat(response[0].avgloss);
+                // lossValue = (lossValue * 100).toFixed(3);
+
                 var delta = response[0].bgdelta + " mg/dL\n" + response[0].noise;
-				
-				var sinceread = parseInt(response[0].timesinceread);
-				var sinceupload = parseInt(response[0].timesinceupload);
-				
-				//if (sinceread == "0")
-					//sinceread = "now";
-				
-				//if (sinceupload == "0")
-					//sinceupload = "now";
-				
-                //var lastdata = "rx: " + sinceread +  "  up: " + sinceupload ;
-				//var lastdata = "";
-                if((lastReadTime == readtime) && (lastBG == bg))
-                {
-                    alertValue = 0;
-                } else
-                {
-        
-                        alertValue = 1;
-                    
-                    
-                    if (lossValue >= 2.5)
-                    {
-                        console.log("excess loss: " + lossValue);
-                        alertValue = 5;
-                        
-                    }
-                    
-                    if (lossValue >= 5)
-                    {
-                        console.log("excess loss: " + lossValue);
-                        alertValue = 4;
-                        
-                    }
-                }
                 
-                if (parseInt(response[0].alert,10) == 500) {
-                  alertValue = 6;
-                  //lastdata = "Out of range!";
-                }
-                if (parseInt(response[0].alert,10) == 501) {
-                  alertValue = 7;
-                  //lastdata =  "Not uploading!";
-                }
+                // not calced in NS endpoint; JWSe 3/27/15
+                // var sinceread = parseInt(response[0].timesinceread);
+                // var sinceupload = parseInt(response[0].timesinceupload);
+                
+                // Commented out by John Costik prior to first GitHub push
+                // if (sinceread == "0")
+                    // sinceread = "now";
+                
+                // if (sinceupload == "0")
+                    // sinceupload = "now";
+                
+                // var lastdata = "rx: " + sinceread +  "  up: " + sinceupload ;
+                // var lastdata = "";
+
+                // Hard set alert value to 0; no alerts because NS watchface processes locally; JWS 3/27/15
+                alertValue = 0;
+
+                // JWS 3/27/15
+                // if((lastReadTime == readtime) && (lastBG == bg))
+                // {
+                //     alertValue = 0;
+                // } else
+                // {
+                //     alertValue = 1;
+                //     
+                //     if (lossValue >= 2.5)
+                //     {
+                //         console.log("excess loss: " + lossValue);
+                //         alertValue = 5;
+                //     }
+                //     
+                //     if (lossValue >= 5)
+                //     {
+                //         console.log("excess loss: " + lossValue);
+                //         alertValue = 4;
+                //     }
+                // }
+                
+                // if (parseInt(response[0].alert,10) == 500) {
+                //     alertValue = 6;
+                //  // lastdata = "Out of range!";
+                // }
+                // if (parseInt(response[0].alert,10) == 501) {
+                //   alertValue = 7;
+                //   //lastdata =  "Not uploading!";
+                // }
                 
                 var bgArray = [];
                 for (var i = 0; i < 12; i++) {
@@ -120,11 +125,12 @@ function fetchCgmData(lastReadTime, lastBG) {
 
               
               
-                //console.log(lastsix + ", " + lastfive + ", " + lastfour + ", " + lastthree + ", " + lasttwo + ", " + lastone);
-                console.log("alertValue: " + alertValue);
+                // console.log(lastsix + ", " + lastfive + ", " + lastfour + ", " + lastthree + ", " + lasttwo + ", " + lastone);
+                // JWS 3/27/15
+                // console.log("alertValue: " + alertValue);
                 console.log("delta: " + delta);
                 Pebble.sendAppMessage({
-                                      "icon":response[0].trend,
+                                      "icon":response[0].direction,
                                       "bg":bg,
                                       "readtime":readtime,
                                       "alert":alertValue,
@@ -142,8 +148,9 @@ function fetchCgmData(lastReadTime, lastBG) {
                                       "bgten": bgArray[9],
                                       "bgeleven": bgArray[10],
                                       "bgtwelve": bgArray[11],
-					"lastread": response[0].timesinceread,
-					"lastupload": response[0].timesinceupload
+                                      // JWS 3/27/15
+                                      // "lastread": response[0].timesinceread,
+                                      // "lastupload": response[0].timesinceupload
                                       });
             } else {
                 console.log("first if");
@@ -169,7 +176,4 @@ Pebble.addEventListener("appmessage",
                         console.log("Received message: " + JSON.stringify(e.payload));
                         fetchCgmData(e.payload.readtime, e.payload.bg);
                         });
-
-
-
 

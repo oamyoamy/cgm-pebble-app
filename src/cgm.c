@@ -75,8 +75,9 @@ enum CgmKey {
     CGM_BG_TEN = 0xF,
     CGM_BG_ELEVEN = 0x10,
     CGM_BG_TWELVE = 0x11,
-    CGM_BG_LASTREAD = 0x12,
-    CGM_BG_LASTUPLOAD = 0x13,
+// JWS 3/27/15
+//     CGM_BG_LASTREAD = 0x12,
+//     CGM_BG_LASTUPLOAD = 0x13,
 };
 
 static const uint32_t CGM_ICONS[] = {
@@ -344,13 +345,13 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
             bg_array[11] = (new_tuple->value->uint8);
             break;
             
-        case CGM_BG_LASTREAD:
-            last_readtime = (new_tuple->value->uint8);
-            break;
+//         case CGM_BG_LASTREAD:
+//             last_readtime = (new_tuple->value->uint8);
+//             break;
             
-        case CGM_BG_LASTUPLOAD:
-            last_uploadtime = (new_tuple->value->uint8);
-            break;
+//         case CGM_BG_LASTUPLOAD:
+//             last_uploadtime = (new_tuple->value->uint8);
+//             break;
             
             
     }
