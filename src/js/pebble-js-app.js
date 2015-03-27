@@ -4,7 +4,7 @@ function fetchCgmData(lastReadTime, lastBG) {
 
     var response;
     var req = new XMLHttpRequest();
-    req.open('GET', "https://xxxxxxxx/pebble", true);
+    req.open('GET', "https://ryancgm2.herokuapp.com/pebble?count=12", true);
 
     req.onload = function(e) {
         console.log(req.readyState);
