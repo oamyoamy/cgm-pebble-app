@@ -68,7 +68,19 @@ function fetchCgmData(lastReadTime, lastBG) {
                 // var lossValue = parseFloat(response[0].avgloss);
                 // lossValue = (lossValue * 100).toFixed(3);
 
-                var delta = response.bgs[0].bgdelta + " mg/dL\n" + response.bgs[0].noise;
+                var noise = response.bgs[0].noise;
+                if (noise = 1)
+                    noise = "clean";
+                else if (noise = 2)
+                    noise = "light";
+                else if (noise = 3)
+                    noise = "medium";
+                else if (noise = 4)
+                    noise = "heavy";
+                else if (noise = 5)
+                    noise = "warmup";
+
+                var delta = response.bgs[0].bgdelta + " mg/dL\n" + noise;
                 
                 // not calced in NS endpoint; JWSe 3/27/15
                 // var sinceread = parseInt(response[0].timesinceread);
