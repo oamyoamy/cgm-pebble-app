@@ -68,17 +68,20 @@ function fetchCgmData(lastReadTime, lastBG) {
                 // var lossValue = parseFloat(response[0].avgloss);
                 // lossValue = (lossValue * 100).toFixed(3);
 
-                var noise = response.bgs[0].noise;
-                if (noise = 1)
+                var noise = response.bgs[0].noise.toString();
+        
+                if (noise = "1")
                     noise = "clean";
-                else if (noise = 2)
+                else if (noise = "2")
                     noise = "light";
-                else if (noise = 3)
+                else if (noise = "3")
                     noise = "medium";
-                else if (noise = 4)
+                else if (noise = "4")
                     noise = "heavy";
-                else if (noise = 5)
+                else if (noise = "5")
                     noise = "warmup";
+
+                console.log(noise);
 
                 var delta = response.bgs[0].bgdelta + " mg/dL\n" + noise;
                 
