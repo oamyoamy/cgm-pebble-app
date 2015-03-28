@@ -247,17 +247,19 @@ static void alert_handler(uint8_t alertValue)
                 
         }
     }
-    if (last_read > 15)
-    {
-        strncpy(str, "Get fail!", 64);
-        icon_bitmap = gbitmap_create_with_resource(CGM_ICONS[10]);
-        bitmap_layer_set_bitmap(icon_layer, icon_bitmap);
-        VibePattern cloud_error = {
-            .durations = high,
-            .num_segments = ARRAY_LENGTH(high),
-        };
-        vibes_enqueue_custom_pattern(cloud_error);
-    }
+
+// JWS 3/27/15; last_read always accumulates past 15 due to other commented out code
+//     if (last_read > 15)
+//     {
+//         strncpy(str, "Get fail!", 64);
+//         icon_bitmap = gbitmap_create_with_resource(CGM_ICONS[10]);
+//         bitmap_layer_set_bitmap(icon_layer, icon_bitmap);
+//         VibePattern cloud_error = {
+//             .durations = high,
+//             .num_segments = ARRAY_LENGTH(high),
+//         };
+//         vibes_enqueue_custom_pattern(cloud_error);
+//     }
     text_layer_set_text(status_layer, str);
 }
 

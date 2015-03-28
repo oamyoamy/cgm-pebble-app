@@ -17,7 +17,7 @@ function fetchCgmData(lastReadTime, lastBG) {
                 console.log("bg: " + response.bgs[0].sgv);
                 console.log("rt: " + response.bgs[0].datetime);
                 console.log("trend: " + response.bgs[0].direction);
-
+                console.log("noise: " + response.bgs[0].noise);
 
                 var bg;
                 var readtime;
