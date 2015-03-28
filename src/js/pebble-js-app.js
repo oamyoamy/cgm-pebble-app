@@ -14,14 +14,14 @@ function fetchCgmData(lastReadTime, lastBG) {
                 console.log("text: " + req.responseText);
                 response = JSON.parse(req.responseText);
                 
-                console.log("bg: " + response[0].sgv);
-                console.log("rt: " + response[0].datetime);
-                console.log("trend: " + response[0].direction);
+                console.log("bg: " + response.bgs[0].sgv);
+                console.log("rt: " + response.bgs[0].datetime);
+                console.log("trend: " + response.bgs[0].direction);
 
 
                 var bg;
                 var readtime;
-                var readTime2 = new Date(response[0].datetime);
+                var readTime2 = new Date(response.bgs[0].datetime);
                 
                 var minutes = readTime2.getMinutes();
                 var hours = readTime2.getHours();
@@ -50,12 +50,12 @@ function fetchCgmData(lastReadTime, lastBG) {
                 else
                     nowTime = hours + ":" + nowTime2.getMinutes();
                 
-                nowTime =  response[0].battery + "% ~ " + (nowTime2.getMonth() + 1) + "/" + (nowTime2.getDate());
+                nowTime =  response.bgs[0].battery + "% ~ " + (nowTime2.getMonth() + 1) + "/" + (nowTime2.getDate());
                 //nowTime = nowTime2.toLocaleTimeString();
                 
                 //console.log(readtime);
                 //console.log("parse: " + readTime2.toLocaleTimeString());
-                bg = response[0].sgv;
+                bg = response.bgs[0].sgv;
                 
                 var alertValue;
                 
@@ -68,7 +68,7 @@ function fetchCgmData(lastReadTime, lastBG) {
                 // var lossValue = parseFloat(response[0].avgloss);
                 // lossValue = (lossValue * 100).toFixed(3);
 
-                var delta = response[0].bgdelta + " mg/dL\n" + response[0].noise;
+                var delta = response.bgs[0].bgdelta + " mg/dL\n" + response.bgs[0].noise;
                 
                 // not calced in NS endpoint; JWSe 3/27/15
                 // var sinceread = parseInt(response[0].timesinceread);
@@ -119,7 +119,7 @@ function fetchCgmData(lastReadTime, lastBG) {
                 
                 var bgArray = [];
                 for (var i = 0; i < 12; i++) {
-                  bgArray[i] = parseInt(163 - (2/3)*(parseInt(response[i].sgv,10) - 39));
+                  bgArray[i] = parseInt(163 - (2/3)*(parseInt(response.bgs[i].sgv,10) - 39));
                 }
               
 
@@ -130,7 +130,7 @@ function fetchCgmData(lastReadTime, lastBG) {
                 // console.log("alertValue: " + alertValue);
                 console.log("delta: " + delta);
                 Pebble.sendAppMessage({
-                                      "icon":response[0].direction,
+                                      "icon":response.bgs[0].direction,
                                       "bg":bg,
                                       "readtime":readtime,
                                       "alert":alertValue,
