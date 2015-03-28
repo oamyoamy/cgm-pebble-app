@@ -17,7 +17,6 @@ function fetchCgmData(lastReadTime, lastBG) {
                 console.log("bg: " + response.bgs[0].sgv);
                 console.log("rt: " + response.bgs[0].datetime);
                 console.log("trend: " + response.bgs[0].direction);
-                console.log("noise: " + response.bgs[0].noise);
 
                 var bg;
                 var readtime;
@@ -70,18 +69,20 @@ function fetchCgmData(lastReadTime, lastBG) {
 
                 var noise = response.bgs[0].noise.toString();
         
-                if (noise = "1")
+                console.log("noise: " + noise);
+
+                if (noise == "1")
                     noise = "clean";
-                else if (noise = "2")
+                else if (noise == "2")
                     noise = "light";
-                else if (noise = "3")
+                else if (noise == "3")
                     noise = "medium";
-                else if (noise = "4")
+                else if (noise == "4")
                     noise = "heavy";
-                else if (noise = "5")
+                else if (noise == "5")
                     noise = "warmup";
 
-                console.log(noise);
+                console.log("noise text: " + noise);
 
                 var delta = response.bgs[0].bgdelta + " mg/dL\n" + noise;
                 
