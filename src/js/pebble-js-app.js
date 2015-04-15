@@ -138,7 +138,18 @@ function fetchCgmData(lastReadTime, lastBG) {
                   bgArray[i] = parseInt(163 - (2/3)*(parseInt(response.bgs[i].sgv,10) - 39));
                 }
               
-
+                console.log(“bgone: “ + bgArray[0]);
+                console.log(“bgone: “ + bgArray[1]);
+                console.log(“bgone: “ + bgArray[2]);
+                console.log(“bgone: “ + bgArray[3]);
+                console.log(“bgone: “ + bgArray[4]);
+                console.log(“bgone: “ + bgArray[5]);
+                console.log(“bgone: “ + bgArray[6]);
+                console.log(“bgone: “ + bgArray[7]);
+                console.log(“bgone: “ + bgArray[8]);
+                console.log(“bgone: “ + bgArray[9]);
+                console.log(“bgone: “ + bgArray[10]);
+                console.log(“bgone: “ + bgArray[11]);
               
               
                 // console.log(lastsix + ", " + lastfive + ", " + lastfour + ", " + lastthree + ", " + lasttwo + ", " + lastone);
